@@ -2,9 +2,9 @@
 
 int main()
 {
-	sf::RenderWindow window( sf::VideoMode( { 200, 200 } ), "Pong" );
+	sf::RenderWindow window( sf::VideoMode( { 800, 600 } ), "Pong" );
 	sf::CircleShape shape( 100.f );
-	shape.setFillColor( sf::Color::Green );
+	shape.setFillColor( sf::Color::Magenta );
 
 	while ( window.isOpen() )
 	{
