@@ -12,6 +12,9 @@ cmake_minimum_required(VERSION 3.28)
 # Приклад: project(Pong VERSION 1.0 LANGUAGES CXX)
 project(Pong VERSION 1.0 LANGUAGES CXX)
 
+# set(variableName value) — встановлює значення змінної.
+# CMAKE_RUNTIME_OUTPUT_DIRECTORY — вбудована змінна CMake яка вказує куди класти скомпільований .exe.
+# ${CMAKE_BINARY_DIR} — теж вбудована змінна, це папка build.
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(FetchContent)
