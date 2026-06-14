@@ -13,8 +13,9 @@ cmake_minimum_required(VERSION 3.28)
 project(Pong VERSION 1.0 LANGUAGES CXX)
 
 # set(variableName value) — встановлює значення змінної.
-# CMAKE_RUNTIME_OUTPUT_DIRECTORY — вбудована змінна CMake яка вказує куди класти скомпільований .exe.
-# ${CMAKE_BINARY_DIR} — теж вбудована змінна, це папка build.
+# CMAKE_RUNTIME_OUTPUT_DIRECTORY — вбудована змінна CMake яка вказує куди класти скомпільований .exe. 
+# ${CMAKE_BINARY_DIR} — теж вбудована змінна, це папка build. (абсолютний шлях на верхній рівень папки build, йде з коробки CMake)
+# в даному випадку я оголошую цю змінну для лінкера, коли він бачить змінну CMAKE_RUNTIME_OUTPUT_DIRECTORY він покладе наш .exe за встановленою адресою
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include(FetchContent)
