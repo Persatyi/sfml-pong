@@ -15,9 +15,20 @@ project(Pong VERSION 1.0 LANGUAGES CXX)
 # set(variableName value) — встановлює значення змінної.
 # CMAKE_RUNTIME_OUTPUT_DIRECTORY — вбудована змінна CMake яка вказує куди класти скомпільований .exe. 
 # ${CMAKE_BINARY_DIR} — теж вбудована змінна, це папка build. (абсолютний шлях на верхній рівень папки build, йде з коробки CMake)
-# в даному випадку я оголошую цю змінну для лінкера, коли він бачить змінну CMAKE_RUNTIME_OUTPUT_DIRECTORY він покладе наш .exe за встановленою адресою
+# в даному випадку я оголошую цю змінну для лінкера, коли він бачить змінну CMAKE_RUNTIME_OUTPUT_DIRECTORY він покладе наш .exe за встановленою адресою тобіш build/bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# include() в CMake — це як #include в C. Підключає додатковий код.
+# В CMake є вбудовані модулі — готові набори функцій. FetchContent
+# це один з них. Без include(FetchContent) команди FetchContent_Declare
+# і FetchContent_MakeAvailable просто не існують — CMake їх не знає.
+
+# SFML — ім'я залежності, сам придумуєш
+# GIT_REPOSITORY — звідки завантажити
+# GIT_TAG — яку версію (тег, гілка або хеш коміту)
+# GIT_SHALLOW ON — завантажити тільки один коміт без всієї історії, швидше
+# EXCLUDE_FROM_ALL — не включати цілі SFML в загальну збірку
+# SYSTEM — вказує що це зовнішня бібліотека, пригнічує попередження компілятора
 include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -41,8 +52,16 @@ FetchContent_MakeAvailable(SFML)
 # Але можна явно: cmake --build . --target TestApp Корисно для тестів, прикладів, утиліт.
 add_executable(main src/main.cpp)
 
+# target_compile_features(<target> <PRIVATE|PUBLIC|INTERFACE> <feature> ...)
+# main — назва цілі (твій .exe)
+# PRIVATE — ця вимога тільки для цього таргету, не передається далі
+# cxx_std_17 — використовувати стандарт C++17
+# Тобто команда каже компілятору — збирай цей проект з підтримкою C++17.
 target_compile_features(main PRIVATE cxx_std_17)
 
+# target_link_libraries(<target> <PRIVATE|PUBLIC|INTERFACE> <library> ...)
+# main — твій .exe
+# PRIVATE — те саме що й попереднє
+# SFML::Graphics — підключаємо графічний модуль SFML до нашого проекту
+# Без цього рядка компілятор не знайде функції SFML навіть якщо #include написаний.
 target_link_libraries(main PRIVATE SFML::Graphics)
-
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT main)
