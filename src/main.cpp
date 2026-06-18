@@ -5,6 +5,12 @@ int main() {
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Magenta);
 
+  sf::RectangleShape rectangle;
+  rectangle.setSize(sf::Vector2f(100, 50));
+  rectangle.setOutlineColor(sf::Color::Red);
+  rectangle.setOutlineThickness(5);
+  rectangle.setPosition(sf::Vector2f(10.f, 20.f));
+
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>()) window.close();
@@ -12,6 +18,7 @@ int main() {
 
     window.clear();
     window.draw(shape);
+    window.draw(rectangle);
     window.display();
   }
 
