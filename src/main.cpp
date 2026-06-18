@@ -2,14 +2,21 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode({800, 600}), "Pong");
-  sf::CircleShape shape(100.f);
+  sf::CircleShape shape(10.f);
   shape.setFillColor(sf::Color::Magenta);
+  shape.setPosition(sf::Vector2f((800.f / 2 - 10.f / 2), (600.f / 2 - 10.f / 2)));
 
-  sf::RectangleShape rectangle;
-  rectangle.setSize(sf::Vector2f(100, 50));
-  rectangle.setOutlineColor(sf::Color::Red);
-  rectangle.setOutlineThickness(5);
-  rectangle.setPosition(sf::Vector2f(10.f, 20.f));
+  sf::RectangleShape leftPaddle;
+  leftPaddle.setSize(sf::Vector2f(15, 80));
+  leftPaddle.setOutlineColor(sf::Color::Cyan);
+  leftPaddle.setOutlineThickness(2);
+  leftPaddle.setPosition(sf::Vector2f(10.f, (600.f / 2 - 80.f / 2)));
+
+  sf::RectangleShape rightPaddle;
+  rightPaddle.setSize(sf::Vector2f(15, 80));
+  rightPaddle.setOutlineColor(sf::Color::Red);
+  rightPaddle.setOutlineThickness(2);
+  rightPaddle.setPosition(sf::Vector2f((800.f - 10.f - 15.f), (600.f / 2 - 80.f / 2)));
 
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
@@ -18,7 +25,8 @@ int main() {
 
     window.clear();
     window.draw(shape);
-    window.draw(rectangle);
+    window.draw(leftPaddle);
+    window.draw(rightPaddle);
     window.display();
   }
 
