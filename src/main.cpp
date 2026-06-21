@@ -23,6 +23,12 @@ int main() {
       if (event->is<sf::Event::Closed>()) window.close();
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+      if () {
+        leftPaddle.move(sf::Vector2f(0.f, -5.f));
+      }
+    }
+
     window.clear();
     window.draw(shape);
     window.draw(leftPaddle);
