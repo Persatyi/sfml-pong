@@ -23,10 +23,21 @@ int main() {
       if (event->is<sf::Event::Closed>()) window.close();
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-      if () {
-        leftPaddle.move(sf::Vector2f(0.f, -5.f));
-      }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && leftPaddle.getPosition().y > 0) {
+      leftPaddle.move(sf::Vector2f(0.f, -0.5f));
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && rightPaddle.getPosition().y > 0) {
+      rightPaddle.move(sf::Vector2f(0.f, -0.5f));
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && leftPaddle.getPosition().y + 80 < 600) {
+      leftPaddle.move(sf::Vector2f(0.f, 0.5f));
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) &&
+        rightPaddle.getPosition().y + 80 < 600) {
+      rightPaddle.move(sf::Vector2f(0.f, 0.5f));
     }
 
     window.clear();
