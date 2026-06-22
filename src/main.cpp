@@ -3,7 +3,7 @@
 int main() {
   sf::RenderWindow window(sf::VideoMode({800, 600}), "Pong");
   sf::CircleShape shape(10.f);
-  shape.setFillColor(sf::Color::Magenta);
+  shape.setFillColor(sf::Color::White);
   shape.setPosition(sf::Vector2f((800.f / 2 - 10.f / 2), (600.f / 2 - 10.f / 2)));
 
   sf::RectangleShape leftPaddle;
@@ -18,9 +18,28 @@ int main() {
   rightPaddle.setOutlineThickness(2);
   rightPaddle.setPosition(sf::Vector2f((800.f - 10.f - 15.f), (600.f / 2 - 80.f / 2)));
 
+  sf::Vector2f ballVelocity(0.1f, 0.1f);
+
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>()) window.close();
+    }
+
+    shape.move(ballVelocity);
+    if (shape.getGlobalBounds().findIntersection(leftPaddle.getGlobalBounds())) {
+      ballVelocity.x = -ballVelocity.x;
+    }
+
+    if (shape.getGlobalBounds().findIntersection(rightPaddle.getGlobalBounds())) {
+      ballVelocity.x = -ballVelocity.x;
+    }
+
+    if (shape.getPosition().y <= 0 || shape.getPosition().y + 20 >= 600) {
+      ballVelocity.y = -ballVelocity.y;
+    }
+    // умова відбиття від бокових стіном, коли налаштуються ракетки - прибрати
+    if (shape.getPosition().x <= 0 || shape.getPosition().x + 20 >= 800) {
+      ballVelocity.x = -ballVelocity.x;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && leftPaddle.getPosition().y > 0) {
