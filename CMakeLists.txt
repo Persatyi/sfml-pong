@@ -65,3 +65,6 @@ target_compile_features(main PRIVATE cxx_std_17)
 # SFML::Graphics — підключаємо графічний модуль SFML до нашого проекту
 # Без цього рядка компілятор не знайде функції SFML навіть якщо #include написаний.
 target_link_libraries(main PRIVATE SFML::Graphics)
+
+# копіюємо папку assets в спомпільований проект
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
