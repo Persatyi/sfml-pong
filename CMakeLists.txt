@@ -50,7 +50,7 @@ FetchContent_MakeAvailable(SFML)
 # EXCLUDE_FROM_ALL - Не включати цю ціль у стандартну збірку. 
 # Наприклад: add_executable(TestApp EXCLUDE_FROM_ALL test.c) тепер cmake --build . не збере TestApp
 # Але можна явно: cmake --build . --target TestApp Корисно для тестів, прикладів, утиліт.
-add_executable(main src/main.cpp)
+add_executable(main src/main.cpp src/Paddle.cpp)
 
 # target_compile_features(<target> <PRIVATE|PUBLIC|INTERFACE> <feature> ...)
 # main — назва цілі (твій .exe)
@@ -68,3 +68,17 @@ target_link_libraries(main PRIVATE SFML::Graphics)
 
 # копіюємо папку assets в спомпільований проект
 file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+# Команда target_include_directories у CMake використовується для додавання каталогів
+# із заголовними файлами (.h / .hpp) для конкретної цілі (наприклад, виконуваного файлу
+# або бібліотеки). Вона замінює застарілу глобальну команду include_directories,
+# забезпечуючи правильне керування залежностями.
+# target_include_directories(назва_цілі
+#     [PUBLIC|PRIVATE|INTERFACE]
+#     шлях_до_директорії1
+#     шлях_до_директорії2 ...
+# )
+# PRIVATE — каталоги додаються лише для компіляції вказаної цілі.
+# INTERFACE — каталоги додаються лише для цілей, які залежать від вашої цілі (використовується для бібліотек).
+# PUBLIC — каталоги використовуються для компіляції вашої цілі, а також автоматично передаються цілям, які від неї залежать
+target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
