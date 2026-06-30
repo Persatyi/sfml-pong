@@ -4,10 +4,14 @@
 #include <SFML/Graphics.hpp>
 
 class Paddle {
-  Paddle();
-
  public:
-  void move();
+  Paddle(float x, float y, sf::Color color);
+
+  sf::RectangleShape& getShape() {
+    return shape;
+  }
+
+  void move(float x, float y);
 
   void draw();
 

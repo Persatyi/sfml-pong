@@ -50,7 +50,7 @@ FetchContent_MakeAvailable(SFML)
 # EXCLUDE_FROM_ALL - Не включати цю ціль у стандартну збірку. 
 # Наприклад: add_executable(TestApp EXCLUDE_FROM_ALL test.c) тепер cmake --build . не збере TestApp
 # Але можна явно: cmake --build . --target TestApp Корисно для тестів, прикладів, утиліт.
-add_executable(main src/main.cpp src/Paddle.cpp)
+add_executable(main src/main.cpp src/Paddle.cpp src/Ball.cpp)
 
 # target_compile_features(<target> <PRIVATE|PUBLIC|INTERFACE> <feature> ...)
 # main — назва цілі (твій .exe)
