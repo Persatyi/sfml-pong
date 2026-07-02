@@ -12,6 +12,11 @@ cmake_minimum_required(VERSION 3.28)
 # Приклад: project(Pong VERSION 1.0 LANGUAGES CXX)
 project(Pong VERSION 1.0 LANGUAGES CXX)
 
+
+# Команда set(CMAKE_EXPORT_COMPILE_COMMANDS ON) у файлі CMakeLists.txt змушує CMake генерувати спеціальний файл compile_commands.json. Цей файл містить
+# повний перелік точних команд (шляхи до файлів, прапорці, директиви #include), які використовуються для компіляції кожного вихідного файлу у вашому проєкті.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # set(variableName value) — встановлює значення змінної.
 # CMAKE_RUNTIME_OUTPUT_DIRECTORY — вбудована змінна CMake яка вказує куди класти скомпільований .exe. 
 # ${CMAKE_BINARY_DIR} — теж вбудована змінна, це папка build. (абсолютний шлях на верхній рівень папки build, йде з коробки CMake)
