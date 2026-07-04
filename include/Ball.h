@@ -15,6 +15,8 @@ class Ball {
 
   void checkPaddleCollision(Paddle& paddle);
 
+  void resetBall();
+
   sf::CircleShape& getShape() {
     return shape;
   }
