@@ -15,7 +15,9 @@ class Ball {
 
   void checkPaddleCollision(Paddle& paddle);
 
-  void resetBall();
+  void resetBall(float x, float y) {
+    shape.setPosition(sf::Vector2f(x, y));
+  }
 
   sf::CircleShape& getShape() {
     return shape;
