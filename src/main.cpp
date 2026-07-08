@@ -46,6 +46,7 @@ int main() {
   enum class GameState { Menu, Playing };
   GameState state = GameState::Menu;
 
+  // стан для визначення який пункт меню вибрано
   enum class MenuItem { Start, Quit };
   MenuItem selected = MenuItem::Start;
 
@@ -56,6 +57,8 @@ int main() {
     }
 
     if (state == GameState::Menu) {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+      }
       window.clear();
       window.draw(menu.getStartText());
       window.draw(menu.getQuitText());

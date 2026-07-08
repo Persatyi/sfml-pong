@@ -15,7 +15,10 @@ class Menu {
     return quit;
   }
 
+  void arrowMove();
+
  private:
+  sf::RectangleShape shape;
   sf::Text start;
   sf::Text quit;
 };
