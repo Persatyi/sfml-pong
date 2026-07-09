@@ -15,10 +15,14 @@ class Menu {
     return quit;
   }
 
+  sf::ConvexShape& getArrowShape() {
+    return arrowShape;
+  }
+
   void arrowMove();
 
  private:
-  sf::RectangleShape shape;
+  sf::ConvexShape arrowShape;
   sf::Text start;
   sf::Text quit;
 };

@@ -60,6 +60,7 @@ int main() {
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
       }
       window.clear();
+      window.draw(menu.getArrowShape());
       window.draw(menu.getStartText());
       window.draw(menu.getQuitText());
       window.display();
