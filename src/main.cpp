@@ -46,19 +46,16 @@ int main() {
   enum class GameState { Menu, Playing };
   GameState state = GameState::Menu;
 
-  // стан для визначення який пункт меню вибрано
-  enum class MenuItem { Start, Quit };
-  MenuItem selected = MenuItem::Start;
-
   // Цикл для роботи нашої програми
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
       if (event->is<sf::Event::Closed>()) window.close();
+      if (state == GameState::Menu) {
+        menu.handleInput(*event);
+      }
     }
 
     if (state == GameState::Menu) {
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-      }
       window.clear();
       window.draw(menu.getArrowShape());
       window.draw(menu.getStartText());

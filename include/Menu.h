@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+enum MenuItem { Start, Quit };
+
 class Menu {
  public:
   Menu(const sf::Font& font, std::string start, std::string quit);
@@ -19,9 +21,13 @@ class Menu {
     return arrowShape;
   }
 
-  void arrowMove();
+  void updateMenuVisuals();
+
+  void handleInput(const sf::Event& event);
 
  private:
+  // стан для визначення який пункт меню вибрано
+  int selectedItem = MenuItem::Start;
   sf::ConvexShape arrowShape;
   sf::Text start;
   sf::Text quit;
