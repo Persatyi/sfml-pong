@@ -46,3 +46,12 @@ void Menu::handleInput(const sf::Event& event) {
     }
   }
 }
+
+GameState Menu::getSelected() {
+  switch (selectedItem) {
+    case MenuItem::Start:
+      return GameState::WaitingToStart;
+    case MenuItem::Quit:
+      return GameState::Quit;
+  }
+}

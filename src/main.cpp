@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Ball.h"
+#include "GameEnums.h"
 #include "Menu.h"
 #include "Paddle.h"
 
@@ -42,20 +43,21 @@ int main() {
   Paddle leftPaddle(10.f, (600.f / 2 - 80.f / 2), sf::Color::Cyan);
   Paddle rightPaddle((800.f - 10.f - 15.f), (600.f / 2 - 80.f / 2), sf::Color::Red);
 
-  // стан для визначення чи відкривати меню чи гру
-  enum class GameState { Menu, Playing };
-  GameState state = GameState::Menu;
+  GameState gameState = GameState::Menu;
 
   // Цикл для роботи нашої програми
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
-      if (event->is<sf::Event::Closed>()) window.close();
-      if (state == GameState::Menu) {
+      if (event->is<sf::Event::Closed>() || gameState == GameState::Quit) window.close();
+      if (gameState == GameState::Menu) {
         menu.handleInput(*event);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Enter)) {
+          gameState = menu.getSelected();
+        }
       }
     }
 
-    if (state == GameState::Menu) {
+    if (gameState == GameState::Menu) {
       window.clear();
       window.draw(menu.getArrowShape());
       window.draw(menu.getStartText());

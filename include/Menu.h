@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-enum MenuItem { Start, Quit };
+#include "GameEnums.h"
 
 class Menu {
  public:
@@ -24,6 +24,8 @@ class Menu {
   void updateMenuVisuals();
 
   void handleInput(const sf::Event& event);
+
+  GameState getSelected();
 
  private:
   // стан для визначення який пункт меню вибрано
