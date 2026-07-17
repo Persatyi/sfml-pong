@@ -17,6 +17,10 @@ class Menu {
     return quit;
   }
 
+  sf::Text& getReadyText() {
+    return ready;
+  }
+
   sf::ConvexShape& getArrowShape() {
     return arrowShape;
   }
@@ -33,6 +37,7 @@ class Menu {
   sf::ConvexShape arrowShape;
   sf::Text start;
   sf::Text quit;
+  sf::Text ready;
 };
 
 #endif  // MENU_H_

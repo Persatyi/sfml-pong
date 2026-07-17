@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <string>
 
 #include "Ball.h"
@@ -12,6 +13,7 @@ int main() {
   // підключаєм шрифт
   sf::Font font;
   if (!font.openFromFile("assets/fonts/BlackOpsOne-Regular.ttf")) {
+    std::cerr << "Error loading font\n";
     return -1;
   }
 
@@ -45,6 +47,11 @@ int main() {
 
   GameState gameState = GameState::Menu;
 
+  // --- Змінні для мигання ---
+  sf::Clock blinkClock;        // Таймер
+  bool showText = true;        // Прапорець видимості
+  float blinkInterval = 0.5f;  // Інтервал мигання в секундах
+
   // Цикл для роботи нашої програми
   while (window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
@@ -63,7 +70,31 @@ int main() {
       window.draw(menu.getStartText());
       window.draw(menu.getQuitText());
       window.display();
-    } else {
+    } else if (gameState == GameState::WaitingToStart) {
+      // Логіка мигання тексту
+      // Якщо з моменту останнього перезапуску таймера пройшло більше ніж 0.5 сек
+      if (blinkClock.getElapsedTime().asSeconds() > blinkInterval) {
+        showText = !showText;  // Змінюємо видимість на протилежну
+        blinkClock.restart();  // Скидаємо таймер
+      }
+
+      // Перевіряємо натискання пробілу
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+        gameState = GameState::Playing;
+      }
+
+      window.clear();
+
+      // Малюємо текст готовності ТІЛЬКИ якщо showText == true
+      if (showText) {
+        window.draw(menu.getReadyText());
+      }
+
+      window.draw(dividingLine);
+      window.draw(leftPaddle.getShape());
+      window.draw(rightPaddle.getShape());
+      window.display();
+    } else if (gameState == GameState::Playing) {
       // рух м'яча
       ball.move();
 

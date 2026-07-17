@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
-    : start(font), quit(font), arrowShape(3) {
+    : start(font), quit(font), arrowShape(3), ready(font) {
   start.setString(startText);
   start.setCharacterSize(40);
   start.setPosition(sf::Vector2f(300.f, 250.f));
@@ -9,6 +9,11 @@ Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
   quit.setString(quitText);
   quit.setCharacterSize(40);
   quit.setPosition(sf::Vector2f(300.f, 320.f));
+
+  ready.setString("Press space to start");
+  ready.setCharacterSize(20);
+  ready.setPosition(sf::Vector2f(300.f, 320.f));
+  ready.setFillColor(sf::Color::Green);
 
   // Задаємо координати точок для трикутника
   arrowShape.setPoint(0, sf::Vector2f(0.f, 0.f));
@@ -18,7 +23,7 @@ Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
   arrowShape.setFillColor(sf::Color::Green);
 
   updateMenuVisuals();
-};
+}
 
 void Menu::updateMenuVisuals() {
   if (selectedItem == Start) {
@@ -53,5 +58,7 @@ GameState Menu::getSelected() {
       return GameState::WaitingToStart;
     case MenuItem::Quit:
       return GameState::Quit;
+    default:
+      return GameState::Menu;
   }
 }
