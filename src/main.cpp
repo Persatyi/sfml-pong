@@ -62,6 +62,17 @@ int main() {
           gameState = menu.getSelected();
         }
       }
+
+      // Обробка паузи по клавіші Escape
+      if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+        if (keyPressed->code == sf::Keyboard::Key::Escape) {
+          if (gameState == GameState::Playing) {
+            gameState = GameState::Paused;
+          } else if (gameState == GameState::Paused) {
+            gameState = GameState::Playing;
+          }
+        }
+      }
     }
 
     if (gameState == GameState::Menu) {
@@ -157,6 +168,8 @@ int main() {
       window.draw(leftPaddle.getShape());
       window.draw(rightPaddle.getShape());
       window.display();
+    } else if (gameState == GameState::Paused) {
+      // тут будемо відмальовувати меню паузи
     }
   }
 
