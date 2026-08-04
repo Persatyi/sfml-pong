@@ -170,6 +170,9 @@ int main() {
       window.display();
     } else if (gameState == GameState::Paused) {
       // тут будемо відмальовувати меню паузи
+      window.clear();
+      window.draw(menu.getPausedText());
+      window.display();
     }
   }
 

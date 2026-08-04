@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
-    : start(font), quit(font), arrowShape(3), ready(font) {
+    : start(font), quit(font), arrowShape(3), ready(font), paused(font) {
   start.setString(startText);
   start.setCharacterSize(40);
   start.setPosition(sf::Vector2f(300.f, 250.f));
@@ -14,6 +14,11 @@ Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
   ready.setCharacterSize(20);
   ready.setPosition(sf::Vector2f(300.f, 320.f));
   ready.setFillColor(sf::Color::Green);
+
+  paused.setString("Paused");
+  paused.setCharacterSize(30);
+  paused.setPosition(sf::Vector2f(340.f, 110.f));
+  paused.setFillColor(sf::Color::Green);
 
   // Задаємо координати точок для трикутника
   arrowShape.setPoint(0, sf::Vector2f(0.f, 0.f));
