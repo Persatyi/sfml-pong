@@ -21,10 +21,6 @@ class Menu {
     return ready;
   }
 
-  sf::Text& getPausedText() {
-    return paused;
-  }
-
   sf::ConvexShape& getArrowShape() {
     return arrowShape;
   }
@@ -42,7 +38,23 @@ class Menu {
   sf::Text start;
   sf::Text quit;
   sf::Text ready;
+};
+
+class PauseMenu {
+ public:
+  PauseMenu(const sf::Font& font);
+
+  sf::Text& getPausedText() {
+    return paused;
+  }
+
+  sf::Text& getRestartText() {
+    return restart;
+  }
+
+ private:
   sf::Text paused;
+  sf::Text restart;
 };
 
 #endif  // MENU_H_

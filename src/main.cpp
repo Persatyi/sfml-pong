@@ -23,6 +23,7 @@ int main() {
 
   // меню
   Menu menu(font, "Start", "Quit");
+  PauseMenu pauseMenu(font);
 
   // Створюєм текст для рахунку
   sf::Text scoreText(font);
@@ -171,7 +172,15 @@ int main() {
     } else if (gameState == GameState::Paused) {
       // тут будемо відмальовувати меню паузи
       window.clear();
-      window.draw(menu.getPausedText());
+      window.draw(scoreText);
+      window.draw(ball.getShape());
+      window.draw(dividingLine);
+      window.draw(leftPaddle.getShape());
+      window.draw(rightPaddle.getShape());
+      window.draw(pauseMenu.getPausedText());
+      window.draw(pauseMenu.getRestartText());
+      window.draw(menu.getQuitText());
+
       window.display();
     }
   }
