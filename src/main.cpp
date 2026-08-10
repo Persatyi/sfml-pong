@@ -22,7 +22,7 @@ int main() {
   int rightScore = 0;
 
   // меню
-  Menu menu(font, "Start", "Quit");
+  Menu menu(font, "Start", "Settings", "Quit");
   PauseMenu pauseMenu(font);
 
   // Створюєм текст для рахунку
@@ -80,6 +80,7 @@ int main() {
       window.clear();
       window.draw(menu.getArrowShape());
       window.draw(menu.getStartText());
+      window.draw(menu.getSettingsText());
       window.draw(menu.getQuitText());
       window.display();
     } else if (gameState == GameState::WaitingToStart) {
@@ -178,6 +179,7 @@ int main() {
       window.draw(leftPaddle.getShape());
       window.draw(rightPaddle.getShape());
       window.draw(pauseMenu.getPausedText());
+      window.draw(pauseMenu.getSettingsText());
       window.draw(pauseMenu.getRestartText());
       window.draw(menu.getQuitText());
 

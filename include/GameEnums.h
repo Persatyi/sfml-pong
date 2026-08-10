@@ -2,8 +2,8 @@
 #define GAME_ENUMS_H_
 
 // стан для визначення чи відкривати меню чи гру
-enum class GameState { Menu, Playing, WaitingToStart, Paused, Quit };
+enum class GameState { Menu, Playing, WaitingToStart, Paused, Settings, Quit };
 // стан для визначення який пунк меню було вибрано
-enum MenuItem { Start, Quit };
+enum MenuItem { Start, Settings, Quit };
 
 #endif  // GAME_ENUMS_H_

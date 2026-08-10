@@ -7,7 +7,7 @@
 
 class Menu {
  public:
-  Menu(const sf::Font& font, std::string start, std::string quit);
+  Menu(const sf::Font& font, std::string startText, std::string settingsText, std::string quitText);
 
   sf::Text& getStartText() {
     return start;
@@ -19,6 +19,10 @@ class Menu {
 
   sf::Text& getReadyText() {
     return ready;
+  }
+
+  sf::Text& getSettingsText() {
+    return settings;
   }
 
   sf::ConvexShape& getArrowShape() {
@@ -36,6 +40,7 @@ class Menu {
   int selectedItem = MenuItem::Start;
   sf::ConvexShape arrowShape;
   sf::Text start;
+  sf::Text settings;
   sf::Text quit;
   sf::Text ready;
 };
@@ -52,9 +57,14 @@ class PauseMenu {
     return restart;
   }
 
+  sf::Text& getSettingsText() {
+    return settings;
+  }
+
  private:
   sf::Text paused;
   sf::Text restart;
+  sf::Text settings;
 };
 
 #endif  // MENU_H_

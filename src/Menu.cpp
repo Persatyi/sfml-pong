@@ -1,14 +1,19 @@
 #include "Menu.h"
 
-Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
-    : start(font), quit(font), arrowShape(3), ready(font) {
+Menu::Menu(const sf::Font& font, std::string startText, std::string settingsText,
+           std::string quitText)
+    : start(font), settings(font), quit(font), arrowShape(3), ready(font) {
   start.setString(startText);
   start.setCharacterSize(40);
   start.setPosition(sf::Vector2f(300.f, 250.f));
 
+  settings.setString(settingsText);
+  settings.setCharacterSize(40);
+  settings.setPosition(sf::Vector2f(300.f, 320.f));
+
   quit.setString(quitText);
   quit.setCharacterSize(40);
-  quit.setPosition(sf::Vector2f(300.f, 320.f));
+  quit.setPosition(sf::Vector2f(300.f, 390.f));
 
   ready.setString("Press space to start");
   ready.setCharacterSize(20);
@@ -26,12 +31,20 @@ Menu::Menu(const sf::Font& font, std::string startText, std::string quitText)
 }
 
 void Menu::updateMenuVisuals() {
-  if (selectedItem == Start) {
-    start.setFillColor(sf::Color::Green);
-    quit.setFillColor(sf::Color::White);
-  } else if (selectedItem == Quit) {
-    start.setFillColor(sf::Color::White);
-    quit.setFillColor(sf::Color::Green);
+  switch (selectedItem) {
+    case Start:
+      start.setFillColor(sf::Color::Green);
+      settings.setFillColor(sf::Color::White);
+      break;
+    case Settings:
+      start.setFillColor(sf::Color::White);
+      settings.setFillColor(sf::Color::Green);
+      quit.setFillColor(sf::Color::White);
+      break;
+    case Quit:
+      settings.setFillColor(sf::Color::White);
+      quit.setFillColor(sf::Color::Green);
+      break;
   }
   // Додаткові налаштування(вирахування позиції трикутника)
   // 2. Рахуємо позицію трикутника математично
@@ -58,20 +71,27 @@ GameState Menu::getSelected() {
       return GameState::WaitingToStart;
     case MenuItem::Quit:
       return GameState::Quit;
+    case MenuItem::Settings:
+      return GameState::Settings;
     default:
       return GameState::Menu;
   }
 }
 
 // Реалізація меню паузи
-PauseMenu::PauseMenu(const sf::Font& font) : paused(font), restart(font) {
+PauseMenu::PauseMenu(const sf::Font& font) : paused(font), restart(font), settings(font) {
   paused.setString("Paused");
   paused.setCharacterSize(30);
   paused.setPosition(sf::Vector2f(340.f, 110.f));
-  paused.setFillColor(sf::Color::Red);
+  paused.setFillColor(sf::Color::Yellow);
 
   restart.setString("Restart");
   restart.setCharacterSize(30);
   restart.setPosition(sf::Vector2f(340.f, 180.f));
-  restart.setFillColor(sf::Color::Green);
+  restart.setFillColor(sf::Color::White);
+
+  settings.setString("Settings");
+  settings.setCharacterSize(30);
+  settings.setPosition(sf::Vector2f(340.f, 250.f));
+  settings.setFillColor(sf::Color::White);
 }
